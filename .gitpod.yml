@@ -6,7 +6,8 @@ image:
    file: gitpod_conf/.gitpod.Dockerfile
 
 tasks:
-   - init: ./gradlew build
+   - init: sdk install java 15.0.1-open 
+     command: ./gradlew build
    - name: JAVA memory
      env:
       JAVA_TOOL_OPTIONS: -Xmx8192m
