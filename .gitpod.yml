@@ -6,18 +6,8 @@ image:
    file: gitpod_conf/.gitpod.Dockerfile
 
 tasks:
-   - before: sdk install java 15.0.1-open 
-     init: |
-       sdk install gradle 
-       sdk install maven 
-       sdk flush archives 
-       sdk flush temp
-       mkdir /home/gitpod/.m2
-       printf '<settings>\n  <localRepository>/workspace/m2-repository/</localRepository>\n</settings>\n' > /home/gitpod/.m2/settings.xml
-       echo 'export SDKMAN_DIR=\"/home/gitpod/.sdkman\"' >> /home/gitpod/.bashrc.d/99-java
-       echo '[[ -s \"/home/gitpod/.sdkman/bin/sdkman-init.sh\" ]] && source \"/home/gitpod/.sdkman/bin/sdkman-init.sh\"' >> /home/gitpod/.bashrc.d/99-java"
-     command:  ./gradlew build
-       
+   - before: sdk install java 15.0.1-open && sdk use java 15.0.1-open 
+     init: ./gradlew build
    - name: JAVA memory
      env:
       JAVA_TOOL_OPTIONS: -Xmx8192m
